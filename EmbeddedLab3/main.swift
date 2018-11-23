@@ -8,5 +8,18 @@
 
 import Foundation
 
-print("Hello, World!")
+let content: String
+do {
+    content = try String(contentsOfFile: CommandLine.arguments[1])
+}
+catch(_) {
+    fatalError("Could not read File!")
+}
 
+let escapedContent = content.replacingOccurrences(of: "\n", with: "")
+let signalMap = escapedContent.split(separator: " ").map { Int($0)! }
+let results = CDMADecoder.decode(signal: signalMap)
+
+for result in results {
+    print("Satellite \(result.id) has sent bit \(result.bit ? "1" : "0") (delta = \(result.delta))")
+}

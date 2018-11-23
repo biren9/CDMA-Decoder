@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		601261F521A6961F00EA8532 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601261F421A6961F00EA8532 /* main.swift */; };
+		6096342721A8671F00EB0ADE /* CDMADecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096342621A8671F00EB0ADE /* CDMADecoder.swift */; };
+		60DEF20421A7F7A000CC7935 /* GoldCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DEF20321A7F7A000CC7935 /* GoldCodeGenerator.swift */; };
+		60DEF20F21A8016B00CC7935 /* EmbeddedLab3Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DEF20E21A8016B00CC7935 /* EmbeddedLab3Test.swift */; };
+		60DEF21421A8020200CC7935 /* GoldCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DEF20321A7F7A000CC7935 /* GoldCodeGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +29,22 @@
 /* Begin PBXFileReference section */
 		601261F121A6961F00EA8532 /* EmbeddedLab3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EmbeddedLab3; sourceTree = BUILT_PRODUCTS_DIR; };
 		601261F421A6961F00EA8532 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6096342621A8671F00EB0ADE /* CDMADecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMADecoder.swift; sourceTree = "<group>"; };
+		60DEF20321A7F7A000CC7935 /* GoldCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldCodeGenerator.swift; sourceTree = "<group>"; };
+		60DEF20C21A8016B00CC7935 /* EmbeddedLab3Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmbeddedLab3Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DEF20E21A8016B00CC7935 /* EmbeddedLab3Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedLab3Test.swift; sourceTree = "<group>"; };
+		60DEF21021A8016B00CC7935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		601261EE21A6961F00EA8532 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DEF20921A8016B00CC7935 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				601261F321A6961F00EA8532 /* EmbeddedLab3 */,
+				60DEF20D21A8016B00CC7935 /* EmbeddedLab3Test */,
 				601261F221A6961F00EA8532 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				601261F121A6961F00EA8532 /* EmbeddedLab3 */,
+				60DEF20C21A8016B00CC7935 /* EmbeddedLab3Test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,8 +76,19 @@
 			isa = PBXGroup;
 			children = (
 				601261F421A6961F00EA8532 /* main.swift */,
+				60DEF20321A7F7A000CC7935 /* GoldCodeGenerator.swift */,
+				6096342621A8671F00EB0ADE /* CDMADecoder.swift */,
 			);
 			path = EmbeddedLab3;
+			sourceTree = "<group>";
+		};
+		60DEF20D21A8016B00CC7935 /* EmbeddedLab3Test */ = {
+			isa = PBXGroup;
+			children = (
+				60DEF20E21A8016B00CC7935 /* EmbeddedLab3Test.swift */,
+				60DEF21021A8016B00CC7935 /* Info.plist */,
+			);
+			path = EmbeddedLab3Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +111,23 @@
 			productReference = 601261F121A6961F00EA8532 /* EmbeddedLab3 */;
 			productType = "com.apple.product-type.tool";
 		};
+		60DEF20B21A8016B00CC7935 /* EmbeddedLab3Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60DEF21121A8016B00CC7935 /* Build configuration list for PBXNativeTarget "EmbeddedLab3Test" */;
+			buildPhases = (
+				60DEF20821A8016B00CC7935 /* Sources */,
+				60DEF20921A8016B00CC7935 /* Frameworks */,
+				60DEF20A21A8016B00CC7935 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmbeddedLab3Test;
+			productName = EmbeddedLab3Test;
+			productReference = 60DEF20C21A8016B00CC7935 /* EmbeddedLab3Test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +139,9 @@
 				ORGANIZATIONNAME = "Gil Biren";
 				TargetAttributes = {
 					601261F021A6961F00EA8532 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					60DEF20B21A8016B00CC7935 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -110,16 +159,38 @@
 			projectRoot = "";
 			targets = (
 				601261F021A6961F00EA8532 /* EmbeddedLab3 */,
+				60DEF20B21A8016B00CC7935 /* EmbeddedLab3Test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		60DEF20A21A8016B00CC7935 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		601261ED21A6961F00EA8532 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DEF20421A7F7A000CC7935 /* GoldCodeGenerator.swift in Sources */,
+				6096342721A8671F00EB0ADE /* CDMADecoder.swift in Sources */,
 				601261F521A6961F00EA8532 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60DEF20821A8016B00CC7935 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60DEF21421A8020200CC7935 /* GoldCodeGenerator.swift in Sources */,
+				60DEF20F21A8016B00CC7935 /* EmbeddedLab3Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +332,42 @@
 			};
 			name = Release;
 		};
+		60DEF21221A8016B00CC7935 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JL49JUQVB9;
+				INFOPLIST_FILE = EmbeddedLab3Test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.hs-karlsruhe.-EmbeddedLab3.EmbeddedLab3Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		60DEF21321A8016B00CC7935 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JL49JUQVB9;
+				INFOPLIST_FILE = EmbeddedLab3Test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.hs-karlsruhe.-EmbeddedLab3.EmbeddedLab3Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -278,6 +385,15 @@
 			buildConfigurations = (
 				601261F921A6961F00EA8532 /* Debug */,
 				601261FA21A6961F00EA8532 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60DEF21121A8016B00CC7935 /* Build configuration list for PBXNativeTarget "EmbeddedLab3Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60DEF21221A8016B00CC7935 /* Debug */,
+				60DEF21321A8016B00CC7935 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
