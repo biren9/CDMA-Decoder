@@ -8,6 +8,10 @@
 
 import Foundation
 
+guard CommandLine.arguments.count > 1 else {
+    fatalError("Missing filepath argument")
+}
+
 let content: String
 do {
     content = try String(contentsOfFile: CommandLine.arguments[1])

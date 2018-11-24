@@ -11,7 +11,7 @@ import Cocoa
 class CDMADecoder: NSObject {
     private static let numberOfInterferingSatellites = 3
     private static let maxNoise = 65
-    private static let upperPeak = GoldCodeGenerator.CODE_LENGTH-1 -  numberOfInterferingSatellites * maxNoise
+    private static let upperPeak =  (GoldCodeGenerator.CODE_LENGTH-1) - numberOfInterferingSatellites * maxNoise
     private static let lowerPeak = -(GoldCodeGenerator.CODE_LENGTH-1) + numberOfInterferingSatellites * maxNoise
     
     private static func createScalar(signal: [Int], goldCode: [Int], delta: Int) -> Int {
@@ -33,6 +33,7 @@ class CDMADecoder: NSObject {
                 if(scalar >= upperPeak || scalar <= lowerPeak) {
                     let bit = (scalar >= upperPeak) ? true : false;
                     results.append((id: satellit+1, bit: bit, delta: delta))
+                    break;
                 }
             }
         }
