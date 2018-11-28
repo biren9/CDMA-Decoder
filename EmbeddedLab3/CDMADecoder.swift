@@ -9,30 +9,44 @@
 import Cocoa
 
 class CDMADecoder: NSObject {
-    private static let numberOfInterferingSatellites = 3
-    private static let maxNoise = 65
-    private static let upperPeak =  (GoldCodeGenerator.CODE_LENGTH-1) - numberOfInterferingSatellites * maxNoise
-    private static let lowerPeak = -(GoldCodeGenerator.CODE_LENGTH-1) + numberOfInterferingSatellites * maxNoise
-    
-    private static func createScalar(signal: [Int], goldCode: [Int], delta: Int) -> Int {
+    /*
+        Es muss Gerade / Ungerade Registerlänge beachtet werden! S.598
+     
+     
+     */
+    private static let upperPeak = NSDecimalNumber(decimal: pow(2, 6) - 1).intValue
+    private static let lowerPeak = NSDecimalNumber(decimal: -pow(2, 6) - 1).intValue
+
+    private static func signalBit(signal: [Int], goldCode: [Int]) -> Int {
         var scalar = 0
-        var index = 0
-        for _ in 0..<signal.count {
-            scalar += signal[index] * goldCode[(index + delta) % (goldCode.count-1)]
-            index += 1
+        for index in 0..<signal.count {
+            scalar += goldCode[index] * signal[index]
         }
-        return scalar
+        scalar /= 10
+        if scalar >= upperPeak {
+            return 1
+        }
+        else if scalar <= lowerPeak {
+            return 0
+        }
+        return -1
+    }
+    
+    private static func shift(signal: inout [Int]) {
+        signal.insert(signal.popLast() ?? 0, at: 0)
     }
     
     static func decode(signal: [Int]) -> [(id: Int, bit: Bool, delta: Int)] {
         let goldCodes = GoldCodeGenerator.createGoldCode()
         var results: [(id: Int, bit: Bool, delta: Int)] = []
         for satellit in 0..<GoldCodeGenerator.NUMBER_OF_SATELLITE {
+            var mutatingSignal = signal
             for delta in 0..<signal.count {
-                let scalar = createScalar(signal: signal, goldCode: goldCodes[satellit], delta: delta)
-                if(scalar >= upperPeak || scalar <= lowerPeak) {
-                    let bit = (scalar >= upperPeak) ? true : false;
-                    results.append((id: satellit+1, bit: bit, delta: delta))
+                let bit = signalBit(signal: mutatingSignal, goldCode: goldCodes[satellit])
+                shift(signal: &mutatingSignal)
+                if bit != -1 {
+                    let signalBit = bit == 1 ? true : false
+                    results.append((id: satellit+1, bit: signalBit, delta: delta))
                     break;
                 }
             }
