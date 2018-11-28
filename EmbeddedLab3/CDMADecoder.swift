@@ -14,12 +14,12 @@ class CDMADecoder: NSObject {
     private static var lowPeak = 0
     
     static func generatePeak(for signal: [Int]) {
-        let numberOfInterferingSatellites = abs(signal.max() ?? 0)
+        let numberOfInterferingSatellites = max(signal.max() ?? 0, abs(signal.min() ?? 0))
         highPeak =  1023 - numberOfInterferingSatellites * 65
-        lowPeak = -1 * (1023 + numberOfInterferingSatellites * -63)
+        lowPeak = -1 * (1023 + numberOfInterferingSatellites * -65)
     }
 
-    private static func signalBit(signal: [Int], goldCode: [Int]) -> Int {
+    private static func signalBit(signal: [Int], goldCode: [Int]) -> Int? {
         var scalar = 0
         for index in 0..<signal.count {
             scalar += goldCode[index] * signal[index]
@@ -30,7 +30,7 @@ class CDMADecoder: NSObject {
         else if scalar <= lowPeak {
             return 0
         }
-        return -1
+        return nil
     }
     
     private static func shift(signal: inout [Int]) {
@@ -44,9 +44,8 @@ class CDMADecoder: NSObject {
         for satellit in 0..<GoldCodeGenerator.NUMBER_OF_SATELLITE {
             var mutatingSignal = signal
             for delta in 0..<signal.count {
-                let bit = signalBit(signal: mutatingSignal, goldCode: goldCodes[satellit])
                 shift(signal: &mutatingSignal)
-                if bit != -1 {
+                if let bit = signalBit(signal: mutatingSignal, goldCode: goldCodes[satellit]) {
                     let signalBit = bit == 1 ? true : false
                     results.append((id: satellit+1, bit: signalBit, delta: delta))
                     break;
