@@ -9,24 +9,25 @@
 import Cocoa
 
 class CDMADecoder: NSObject {
-    /*
-        Es muss Gerade / Ungerade Registerlänge beachtet werden! S.598
-     
-     
-     */
-    private static let upperPeak = NSDecimalNumber(decimal: pow(2, 6) - 1).intValue
-    private static let lowerPeak = NSDecimalNumber(decimal: -pow(2, 6) - 1).intValue
+    
+    private static var highPeak = 0
+    private static var lowPeak = 0
+    
+    static func generatePeak(for signal: [Int]) {
+        let numberOfInterferingSatellites = abs(signal.max() ?? 0)
+        highPeak =  1023 - numberOfInterferingSatellites * 65
+        lowPeak = -1 * (1023 + numberOfInterferingSatellites * -63)
+    }
 
     private static func signalBit(signal: [Int], goldCode: [Int]) -> Int {
         var scalar = 0
         for index in 0..<signal.count {
             scalar += goldCode[index] * signal[index]
         }
-        scalar /= 10
-        if scalar >= upperPeak {
+        if scalar >= highPeak {
             return 1
         }
-        else if scalar <= lowerPeak {
+        else if scalar <= lowPeak {
             return 0
         }
         return -1
@@ -37,6 +38,7 @@ class CDMADecoder: NSObject {
     }
     
     static func decode(signal: [Int]) -> [(id: Int, bit: Bool, delta: Int)] {
+        generatePeak(for: signal)
         let goldCodes = GoldCodeGenerator.createGoldCode()
         var results: [(id: Int, bit: Bool, delta: Int)] = []
         for satellit in 0..<GoldCodeGenerator.NUMBER_OF_SATELLITE {
